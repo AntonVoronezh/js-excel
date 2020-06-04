@@ -1,0 +1,25 @@
+{
+  "name": "js-excel",
+  "version": "1.0.0",
+  "description": "курс",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonVoronezh/js-excel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonVoronezh/js-excel/issues"
+  },
+  "homepage": "https://github.com/AntonVoronezh/js-excel#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
