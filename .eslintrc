@@ -6,7 +6,8 @@
     "node": true
   },
   "rules": {
-"no-useless-escape": "off"
+    "no-useless-escape": "off",
+    "linebreak-style": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
