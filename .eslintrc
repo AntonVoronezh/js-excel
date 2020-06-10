@@ -11,7 +11,8 @@
     "object-curly-spacing" : "off",
     "require-jsdoc" : "off",
     "no-trailing-spaces" : "off",
-    "max-len": 0
+    "max-len": 0,
+    "indent": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
