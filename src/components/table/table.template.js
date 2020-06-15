@@ -7,14 +7,21 @@ function toCell() {
   return `<div class="cell" contenteditable></div>`;
 }
 
-function toColumn(el) {
-  return `<div class="column">${el}</div>`;
+function toColumn(col) {
+  return `
+    <div class="column" data-type="resizаble">
+      ${col}
+      <div class="col-resize" data-resize="col"></div>
+    </div>
+  `;
 }
 
 function createRow(index, content) {
+  const resize = index ? '<div class="row-resize" data-resize="row"></div>' : '';
+
   return `
         <div class="row">
-            <div class="row-info">${index ? index : ''}</div>
+            <div class="row-info">${index ? index : ''} ${resize}</div>
             <div class="row-data">${content}</div>
         </div>
         `;
@@ -32,7 +39,7 @@ export function createTable(rowsCount = 15) {
   rows.push(createRow(null, cols));
 
   for (let i = 0; i < rowsCount; i++) {
-      const cells = new Array(colsCount).fill('').map(toCell).join('');
+    const cells = new Array(colsCount).fill('').map(toCell).join('');
 
     rows.push(createRow(i + 1, cells));
   }
