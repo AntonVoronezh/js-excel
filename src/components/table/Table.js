@@ -1,16 +1,18 @@
 import { ExcelComponent } from '@core/ExcelComponent';
 import { createTable } from '@/components/table/table.template';
 import { resizeHandler } from '@/components/table/table.resize';
-import {isCell, matrix, nextSelector, shouldRisize} from '@/components/table/table.functions';
+import { isCell, matrix, nextSelector, shouldRisize } from '@/components/table/table.functions';
 import { TableSelection } from '@/components/table/TableSelection';
 import { $ } from '@core/dom';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
-      listeners: ['mousedown', 'keydown'],
+      name: 'Table',
+      listeners: ['mousedown', 'keydown', 'input'],
+      ...options,
     });
   }
 
@@ -18,11 +20,24 @@ export class Table extends ExcelComponent {
     this.selection = new TableSelection();
   }
 
+  selectCell($cell) {
+    this.selection.select($cell);
+    this.$emit('table:select', $cell);
+  }
+
   init() {
     super.init();
     const $cell = this.$root.find('[data-id="0:0"]');
+    this.selectCell($cell);
 
-    this.selection.select($cell);
+    this.$on('formula:input', (text) => {
+      this.selection.current.text(text);
+      console.log(text);
+    });
+
+    this.$on('formula:done', () => {
+      this.selection.current.focus();
+    });
   }
 
   toHTML() {
@@ -55,7 +70,11 @@ export class Table extends ExcelComponent {
       event.preventDefault();
       const { col, row } = this.selection.current.id(true);
       const $next = this.$root.find(nextSelector(key, col, row));
-      this.selection.select($next);
+      this.selectCell($next);
     }
+  }
+
+  onInput(event) {
+    this.$emit('table:input', $(event.target));
   }
 }
