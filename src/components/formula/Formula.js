@@ -23,9 +23,9 @@ export class Formula extends ExcelComponent {
       this.$formula.text($cell.text());
     });
 
-    this.$subscribe((state) => {
-      console.log('from formula', state);
-    });
+    // this.$subscribe((state) => {
+    //   console.log('from formula', state);
+    // });
   }
 
   toHTML() {
