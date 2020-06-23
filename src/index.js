@@ -7,8 +7,9 @@ import { Table } from '@/components/table/Table';
 import { createStore } from '@core/createStore';
 import { rootReducer } from '@/redux/rootReducer';
 import { storage } from '@core/utils';
+import { initialState } from '@/redux/initialState';
 
-const store = createStore(rootReducer, storage('excel-state'));
+const store = createStore(rootReducer, initialState);
 
 store.subscribe((state) => {
   console.log('App', state);

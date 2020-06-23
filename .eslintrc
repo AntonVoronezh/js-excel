@@ -12,7 +12,8 @@
     "require-jsdoc" : "off",
     "no-trailing-spaces" : "off",
     "max-len": 0,
-    "indent": "off"
+    "indent": "off",
+    "space-before-function-paren": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
