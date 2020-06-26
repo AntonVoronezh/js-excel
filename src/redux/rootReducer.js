@@ -1,30 +1,61 @@
-import { CHANGE_TEXT, TABLE_RESIZE } from '@/redux/types';
+import { CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE } from '@/redux/types';
 
 export function rootReducer(state, action) {
-  let prevState;
   let field;
+  let val;
 
   switch (action.type) {
     case TABLE_RESIZE:
       field = action.data.type === 'col' ? 'colState' : 'rowState';
-      prevState = state[field] || {};
-      prevState[action.data.id] = action.data.value;
 
       return {
         ...state,
-        [field]: prevState,
+        [field]: value(state, field, action),
       };
 
     case CHANGE_TEXT:
-      prevState = state['dataState'] || {};
-      prevState[action.data.id] = action.data.value;
-      console.log(action.data.id);
+      field = 'dataState';
+
       return {
         ...state,
         currentText: action.data.value,
-        dataState: prevState,
+        [field]: value(state, field, action),
       };
+
+    case CHANGE_STYLES:
+      return {
+        ...state,
+        currentStyle: action.data,
+      };
+
+    case APPLY_STYLE:
+      field = 'stylesState';
+      val = state[field] || {};
+      action.data.ids.forEach((id) => {
+        val[id] = { ...val[id], ...action.data.value };
+      });
+
+      return {
+        ...state,
+        currentStyle: action.data,
+        [field]: val,
+        currentStyles: { ...state.currentStyles, ...action.data.value },
+      };
+
+    case CHANGE_TITLE:
+      return {
+        ...state,
+        title: action.data,
+      };
+
     default:
       return state;
   }
+}
+
+function value(state, field, action) {
+  const val = state[field] || {};
+  val[action.data.id] = action.data.value;
+
+  return val;
 }
