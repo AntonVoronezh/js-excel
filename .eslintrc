@@ -3,17 +3,20 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/global": true,
+    "jest": true
   },
   "rules": {
     "no-useless-escape": "off",
     "linebreak-style": "off",
-    "object-curly-spacing" : "off",
-    "require-jsdoc" : "off",
-    "no-trailing-spaces" : "off",
+    "object-curly-spacing": "off",
+    "require-jsdoc": "off",
+    "no-trailing-spaces": "off",
     "max-len": 0,
     "indent": "off",
     "space-before-function-paren": "off"
   },
-  "extends": ["eslint:recommended", "google"]
+  "extends": ["eslint:recommended", "google"],
+  "plugins": ["jest"]
 }
