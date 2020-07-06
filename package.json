@@ -4,9 +4,11 @@
   "description": "курс",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:w": "jest --watch",
     "start": "cross-env NODE_ENV=development webpack-dev-server --open",
-    "build": "cross-env NODE_ENV=production webpack --mode production"
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "lint": "npx eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-loader": "^4.0.2",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.1.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
@@ -43,6 +46,7 @@
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
+    "eslint-plugin-jest": "^23.17.1",
     "normalize.css": "^8.0.1"
   }
 }
